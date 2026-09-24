@@ -1,0 +1,16 @@
+{
+    "name": "SnakeBitePlus",
+    "id": "CSharpSBP",
+    "version": "0.0.5",
+    "description": "一个为杀戮尖塔2制作的蛇咬相关mod，添加了一套拥有蛇咬元素和特殊机制联动的卡牌。",
+    "authors": ["200CC"],
+    "dependencies": [{"id": "BaseLib", "min_version": "0.0.0"}],
+    "load_after": [],
+    "assembly": "CSharpSBP.dll",
+    "image": "mod_image.png",
+    "has_dll": true,
+    "has_pck": true,
+    "has_powers": true,
+    "affects_gameplay": true,
+    "min_game_version": "0.107.1"
+}

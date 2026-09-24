@@ -1,0 +1,23 @@
+# ===== 仓库级忽略（更多蛇咬 / SnakeBitePlus）=====
+
+# 游戏反编译源码（第三方版权，体积 2.9GB，不上传）
+/Sts2/
+
+# 构建产物与备份
+/build/
+/backups/
+
+# IDE / 工具本地目录
+/.trae/
+/.markdown-collab/
+/.vs/
+/.mcp.json
+/Program.cs
+
+# 运行时日志
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini

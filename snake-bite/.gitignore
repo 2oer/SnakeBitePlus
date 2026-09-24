@@ -1,0 +1,16 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+
+# 构建输出
+/SBPDebug/
+bin/
+obj/
+
+# 用户本地文件
+*.user
+*.suo

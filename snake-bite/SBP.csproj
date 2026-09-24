@@ -1,0 +1,51 @@
+<Project Sdk="Godot.NET.Sdk/4.6.2">
+  <PropertyGroup>
+    <AssemblyName>CSharpSBP</AssemblyName>
+    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'windows' ">net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <NuGetAuditLevel>moderate</NuGetAuditLevel>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>$(NoWarn);MSB3270</NoWarn>
+    <Title>CSharpSBP</Title>
+    <OutputPath>SBPDebug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.0.6" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>E:\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="BaseLib">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\Mods\SnakeBitePlus\BaseLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>E:\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="sts2">
+      <HintPath>E:\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources/**" />
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+    <!-- 防止代码备份目录被 Godot SDK 默认通配符卷入编译 -->
+    <Compile Remove="**\_backup*\**" />
+    <None Include="CSharpSBP.json" />
+    <None Include="project.godot" />
+  </ItemGroup>
+
+  <Target Name="CopyToModsFolderOnBuild" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="E:\SteamLibrary\steamapps\common\Slay the Spire 2\Mods\CSharpSBP\" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="E:\SteamLibrary\steamapps\common\Slay the Spire 2\Mods\CSharpSBP\" />
+    <Copy SourceFiles="$(ProjectDir)$(TargetName).json" DestinationFolder="E:\SteamLibrary\steamapps\common\Slay the Spire 2\Mods\CSharpSBP\" />
+    <!-- pck 由 Godot 4.5.1 编辑器导出到项目外的 ..\build\CSharpSBP.pck（放在项目内会被 Godot 自包含打包）；存在时才随编译部署 -->
+    <Copy Condition="Exists('$(ProjectDir)..\build\CSharpSBP.pck')" SourceFiles="$(ProjectDir)..\build\CSharpSBP.pck" DestinationFolder="E:\SteamLibrary\steamapps\common\Slay the Spire 2\Mods\CSharpSBP\" />
+  </Target>
+</Project>

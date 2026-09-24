@@ -1,0 +1,28 @@
+<Project>
+  <PropertyGroup>
+    <GodotToolsDir>$(MSBuildThisFileDirectory).godot\mono\temp</GodotToolsDir>
+    <ModName>$(MSBuildProjectName)</ModName>
+    <ModsPath>$(SteamPath)steamapps\common\Slay the Spire 2\Mods\</ModsPath>
+    <Sts2DataPath>$(SteamPath)steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\</Sts2DataPath>
+    <SteamPath Condition="!Exists('$(SteamPath)')">E:\SteamLibrary\</SteamPath>
+    <GamePath>$(SteamPath)steamapps\common\Slay the Spire 2\</GamePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataPath)0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>$(Sts2DataPath)GodotSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataPath)sts2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CopyToModsFolderOnBuild" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(ModsPath)$(ModName)\" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ModsPath)$(ModName)\" />
+    <Copy SourceFiles="$(ProjectDir)$(ModName).json" DestinationFolder="$(ModsPath)$(ModName)\" />
+  </Target>
+</Project>
